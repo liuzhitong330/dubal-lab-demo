@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Brain Aging Suppressors &amp; Sex Chromosomes — Cathy Liu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body { font-family: Georgia, serif; max-width: 720px; margin: 0 auto;
+         padding: 2.5rem 1.5rem 4rem; line-height: 1.65; color: #222; background: #fff; }
+  h1, h2, h3 { font-family: -apple-system, system-ui, sans-serif; }
+  h1 { font-size: 1.45rem; margin-bottom: .2rem; }
+  .byline { font-family: system-ui, sans-serif; font-size: .85rem; color: #777; margin-bottom: 2rem; }
+  h2 { font-size: 1.1rem; margin-top: 2.5rem; border-bottom: 1px solid #eee; padding-bottom: .3rem; }
+  .note { background: #f6f6f4; border-left: 3px solid #999; padding: .8rem 1rem;
+          font-family: system-ui, sans-serif; font-size: .85rem; color: #444; margin: 1.2rem 0; }
+  .fig-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin: 1.2rem 0; }
+  .fig-row figure { flex: 1; min-width: 270px; margin: 0; }
+  .fig-row img { width: 100%; }
+  figure { margin: 1.2rem 0; }
+  figure img { max-width: 100%; display: block; }
+  figcaption { font-family: system-ui, sans-serif; font-size: .78rem; color: #777; margin-top: .4rem; }
+  .code-wrap { overflow-x: auto; margin: 1rem 0; }
+  pre { white-space: pre; background: #f8f8f8; padding: 1rem; font-size: .8rem;
+        border-left: 3px solid #ddd; font-family: ui-monospace, Menlo, monospace; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; margin: 1rem 0;
+          font-family: system-ui, sans-serif; }
+  td, th { padding: .4rem .7rem; border-bottom: 1px solid #eee; text-align: left; }
+  th { font-weight: 600; color: #555; }
+  a { color: #2255aa; }
+  .meta { font-family: system-ui, sans-serif; font-size: .8rem; color: #888;
+          margin-top: 3rem; border-top: 1px solid #eee; padding-top: 1rem; }
+  .tag { display: inline-block; font-family: system-ui, sans-serif; font-size: .75rem;
+         background: #eef2f8; color: #2255aa; padding: .15rem .5rem;
+         border-radius: 3px; margin-right: .3rem; }
+  .highlight { background: #fff8e1; border-left: 3px solid #f0b429; padding: .6rem 1rem;
+               font-family: system-ui, sans-serif; font-size: .88rem; margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<h1>Where Longevity Meets the Brain: Aging Suppressors and Sex Chromosomes in the Mouse Brain Atlas</h1>
+<div class="byline">Cathy Liu · cathyliu014@gmail.com · personal exploratory project, July 2026</div>
+
+<span class="tag">klotho</span>
+<span class="tag">aging suppressors</span>
+<span class="tag">X chromosome</span>
+<span class="tag">choroid plexus</span>
+<span class="tag">Allen Brain Atlas</span>
+<span class="tag">Python</span>
+
+<p style="margin-top:1.2rem">
+The <a href="https://www.duballab.org/" target="_blank">Dubal lab</a> investigates the biology of
+longevity from two complementary angles: the role of aging-suppressor proteins like klotho and
+FGF21 in protecting the brain, and the role of sex chromosome dosage in determining why
+females tend to live longer and are more resilient to certain brain diseases. I was curious
+how these two threads intersect at the transcriptional level — specifically, where in the brain
+are the aging suppressors expressed, and how broadly are X-chromosome escapee genes (which are
+present at double dosage in XX individuals) distributed across brain structures?
+</p>
+
+<p>
+To explore this, I pulled <em>in situ</em> hybridization expression data from the
+<a href="https://mouse.brain-map.org/" target="_blank">Allen Mouse Brain Atlas</a>
+for eight aging suppressor / longevity genes and four X-chromosome escapee genes
+across eight brain regions — including the choroid plexus, which the Dubal lab's work
+has highlighted as a critical secretory hub for longevity factors into CSF.
+</p>
+
+<div class="note">
+<strong>What this is.</strong> A personal exploratory analysis, not novel research.
+All data from the Allen Mouse Brain Atlas public API (Allen Institute for Brain Science, 2004).
+ISH expression energy is a bulk regional metric (sum of pixel intensity × density,
+normalized by structure volume). Analysis and interpretation are mine alone.
+</div>
+
+<h2>Part 1 — Aging Suppressor Genes</h2>
+
+<figure>
+  <img src="aging_heatmap.svg?v=1"
+       alt="Heatmap of aging suppressor gene expression across eight brain regions">
+  <figcaption>ISH expression energy for eight aging suppressor / longevity genes across eight brain
+  structures (row-normalized per gene). Choroid plexus column highlighted in yellow — it concentrates
+  the secretory aging suppressors. Raw expression values are shown where &gt; 0.5.</figcaption>
+</figure>
+
+<div class="highlight">
+<strong>Klotho (Kl) peaks in choroid plexus and cerebellum</strong> — the two known expression
+sites in brain. Expression energy is 3.49 in choroid plexus and 3.61 in cerebellum (Purkinje cells),
+both substantially higher than hippocampus (2.97) or isocortex (1.32). Fgf21 (0.66) and Igf1 (1.22)
+also peak in choroid plexus, marking this structure as the brain's primary secretory hub for
+CSF-borne longevity factors.
+</div>
+
+<p>
+Several patterns are biologically interpretable:
+</p>
+<ul>
+<li>
+<strong>The choroid plexus concentrates secreted longevity factors (Kl, Fgf21, Igf1, Sirt1).</strong>
+This is consistent with their role as CSF-secreted proteins that act on downstream brain circuits.
+The Dubal lab's finding that peripheral or CSF klotho elevation enhances hippocampal synaptic
+plasticity fits perfectly: the choroid plexus is the bottleneck through which these factors enter
+the brain, making it a compelling therapeutic target for cognitive aging.
+</li>
+
+<li>
+<strong>Gdf11 and Gdf15 show distinct distributions</strong> — Gdf11 peaks in thalamus and
+olfactory bulb, Gdf15 in olfactory bulb, both relatively low in hippocampus. If "young blood"
+factors like GDF11 act on the brain, these expression patterns suggest they do so via
+circuits beyond the canonical hippocampal plasticity targets.
+</li>
+
+<li>
+<strong>Tert (telomerase reverse transcriptase) is expressed in isocortex and hippocampus</strong>
+at moderate levels, consistent with neural progenitor activity and the known role of telomere
+maintenance in brain aging. Its relatively uniform distribution contrasts with the choroid-plexus-biased
+secreted factors.
+</li>
+</ul>
+
+<h2>Part 2 — X-Chromosome Escapee Genes</h2>
+
+<figure>
+  <img src="xescape_heatmap.svg?v=1"
+       alt="Heatmap of X-chromosome escapee gene expression across eight brain regions">
+  <figcaption>Raw ISH expression energy (shared color scale) for four X-escapee genes that are
+  expressed from both X chromosomes in XX individuals. The blue concept box at bottom summarizes
+  the sex-dosage hypothesis. Values &gt; 1.0 annotated in cells.</figcaption>
+</figure>
+
+<p>
+Several X-escapee genes show robust expression throughout the brain:
+</p>
+<ul>
+<li>
+<strong>Kdm5c</strong> (KDM5C / JARID1C, H3K4me3 demethylase) is the most broadly and highly
+expressed of the group — expression energy 6.98 in isocortex, 6.85 in olfactory bulb, 4.65
+in hippocampus. This chromatin regulator shapes the active promoter landscape genome-wide.
+In XX individuals, double dosage of Kdm5c could systematically maintain a more youthful
+chromatin state across brain cell types.
+</li>
+
+<li>
+<strong>Usp9x</strong> (ubiquitin protease, X-linked, escapee) is broadly expressed across
+all regions (2.3–6.0 expression energy) and is required for synaptic protein stability.
+Dosage differences in Usp9x between XX and XY brains could influence the rate of protein
+aggregation and clearance in aging neurons.
+</li>
+
+<li>
+<strong>Kdm6a</strong> (UTX, H3K27me3 demethylase) peaks in choroid plexus (5.88) and
+olfactory bulb (4.54) — the same structures that are hubs for aging suppressor expression.
+The convergence of Kdm6a and klotho in choroid plexus is intriguing: UTX-mediated chromatin
+opening could regulate klotho transcription itself, linking the sex chromosome dosage and
+longevity-factor axes.
+</li>
+</ul>
+
+<h2>Why this connects to the lab's open questions</h2>
+<ul>
+<li>
+<strong>"How do sex chromosomes impact longevity and disease susceptibility?"</strong> —
+The X-escapee gene expression map provides a starting point for asking which brain structures
+are most influenced by sex chromosome dosage. KDM6A in choroid plexus, and KDM5C broadly
+across cortex and hippocampus, are positioned to exert systematic effects on chromatin state
+and gene regulation that could differ between XX and XY brains.
+</li>
+<li>
+<strong>"How do aging-suppressors impact the brain?"</strong> — The choroid plexus concentration
+of Kl, Fgf21, and Igf1 frames this structure as the primary node for aging-suppressor input to
+the brain. Understanding what regulates their expression in choroid plexus epithelial cells —
+and how that changes with aging or disease — seems like a high-leverage question.
+</li>
+<li>
+<strong>"Can anti-aging strategies prevent cognitive decline?"</strong> — The hippocampal
+expression of klotho and the X-escapee chromatin regulators suggests that both longevity-factor
+delivery (via CSF from choroid plexus) and chromatin state maintenance (via KDM6A/KDM5C dosage)
+converge on the hippocampus — the canonical structure for cognitive aging. These two axes could
+potentially be targeted in combination.
+</li>
+</ul>
+
+<p>
+My background spans wet lab biology and computational analysis. I've worked with brain region
+atlas data, RNA-seq, and epigenomic datasets, and I'm comfortable contributing both at the bench
+and computationally. I think my combination of practical lab experience and computational
+background is where I can be most useful to your lab.
+</p>
+
+<h2>Methods</h2>
+<p>
+Data retrieved July 2026. Allen Mouse Brain Atlas (Allen Institute for Brain Science, 2004),
+in situ hybridization, adult mouse (P56), via RMA API at
+<code>api.brain-map.org/api/v2/data/query.json</code>.
+Structures: Choroid plexus (id 220), Isocortex (315), Hippocampal formation (1089),
+Cerebellum (512), Hypothalamus (1097), Striatum/Caudoputamen (672), Olfactory bulb (507),
+Thalamus (549).
+Expression metric: <em>expression_energy</em> from StructureUnionize (first ISH dataset
+returned per gene). Ddx3x excluded (no expression data in this dataset).
+Figures generated with pure Python (SVG). Code:
+<a href="fetch_data.py">fetch_data.py</a>,
+<a href="make_figures.py">make_figures.py</a>.
+Raw data: <a href="expression.tsv">expression.tsv</a>.
+</p>
+
+<div class="meta">
+Cathy Liu — cathyliu014@gmail.com | 415-216-3799<br>
+<a href="https://liuzhitong330.github.io/tvb-llm-robust-neurostim/" target="_blank">Epilepsy neurostimulation project</a> ·
+<a href="https://arxiv.org/abs/2606.04339" target="_blank">arXiv:2606.04339</a>
+</div>
+
+</body>
+</html>
