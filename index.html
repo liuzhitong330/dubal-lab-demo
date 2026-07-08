@@ -44,7 +44,7 @@
 <span class="tag">klotho</span>
 <span class="tag">aging suppressors</span>
 <span class="tag">X chromosome</span>
-<span class="tag">choroid plexus</span>
+<span class="tag">sex chromosomes</span>
 <span class="tag">Allen Brain Atlas</span>
 <span class="tag">Python</span>
 
@@ -62,8 +62,7 @@ present at double dosage in XX individuals) distributed across brain structures?
 To explore this, I pulled <em>in situ</em> hybridization expression data from the
 <a href="https://mouse.brain-map.org/" target="_blank">Allen Mouse Brain Atlas</a>
 for eight aging suppressor / longevity genes and four X-chromosome escapee genes
-across eight brain regions — including the choroid plexus, which the Dubal lab's work
-has highlighted as a critical secretory hub for longevity factors into CSF.
+across eight brain regions spanning cortex, hippocampus, cerebellum, and subcortical structures.
 </p>
 
 <div class="note">
@@ -79,16 +78,17 @@ normalized by structure volume). Analysis and interpretation are mine alone.
   <img src="aging_heatmap.svg?v=1"
        alt="Heatmap of aging suppressor gene expression across eight brain regions">
   <figcaption>ISH expression energy for eight aging suppressor / longevity genes across eight brain
-  structures (row-normalized per gene). Choroid plexus column highlighted in yellow — it concentrates
-  the secretory aging suppressors. Raw expression values are shown where &gt; 0.5.</figcaption>
+  structures (row-normalized per gene). Cerebellum and hippocampus highlighted — major expression
+  sites for klotho and hippocampal aging relevance. Raw expression values annotated where &gt; 0.5.</figcaption>
 </figure>
 
 <div class="highlight">
-<strong>Klotho (Kl) peaks in choroid plexus and cerebellum</strong> — the two known expression
-sites in brain. Expression energy is 3.49 in choroid plexus and 3.61 in cerebellum (Purkinje cells),
-both substantially higher than hippocampus (2.97) or isocortex (1.32). Fgf21 (0.66) and Igf1 (1.22)
-also peak in choroid plexus, marking this structure as the brain's primary secretory hub for
-CSF-borne longevity factors.
+<strong>Klotho (Kl) peaks in cerebellum (3.61) and hippocampus (2.97)</strong> — consistent with
+the known enrichment of klotho in cerebellar Purkinje cells and hippocampal neurons. Isocortex (1.32)
+and thalamus (1.83) show moderate expression. Fgf21 (0.64) and Igf1 (1.01) both peak in
+olfactory bulb, while their hippocampal expression (0.11 and 0.25 respectively) is lower —
+suggesting that for FGF21 and IGF1, peripheral or distant brain sources supply the hippocampus
+rather than local production.
 </div>
 
 <p>
@@ -96,25 +96,25 @@ Several patterns are biologically interpretable:
 </p>
 <ul>
 <li>
-<strong>The choroid plexus concentrates secreted longevity factors (Kl, Fgf21, Igf1, Sirt1).</strong>
-This is consistent with their role as CSF-secreted proteins that act on downstream brain circuits.
-The Dubal lab's finding that peripheral or CSF klotho elevation enhances hippocampal synaptic
-plasticity fits perfectly: the choroid plexus is the bottleneck through which these factors enter
-the brain, making it a compelling therapeutic target for cognitive aging.
+<strong>Klotho's cerebellar and hippocampal concentration</strong> is consistent with the Dubal
+lab's finding that klotho elevation (via peripheral or CSF delivery) enhances hippocampal synaptic
+plasticity. Local hippocampal klotho expression suggests these neurons are both producers and
+targets of the longevity signal — a short-range autocrine or paracrine loop that could be
+disrupted in aging or Alzheimer's disease.
 </li>
 
 <li>
-<strong>Gdf11 and Gdf15 show distinct distributions</strong> — Gdf11 peaks in thalamus and
-olfactory bulb, Gdf15 in olfactory bulb, both relatively low in hippocampus. If "young blood"
-factors like GDF11 act on the brain, these expression patterns suggest they do so via
-circuits beyond the canonical hippocampal plasticity targets.
+<strong>Gdf11 peaks in thalamus (1.58) and olfactory bulb (1.57)</strong>, Gdf15 in olfactory
+bulb (0.33), both relatively low in hippocampus. If "young blood" factors like GDF11 act on
+the brain, these expression patterns suggest they do so via circuits beyond the canonical
+hippocampal plasticity targets — or that they act primarily on the brain via delivery through
+CSF from distant sources.
 </li>
 
 <li>
-<strong>Tert (telomerase reverse transcriptase) is expressed in isocortex and hippocampus</strong>
-at moderate levels, consistent with neural progenitor activity and the known role of telomere
-maintenance in brain aging. Its relatively uniform distribution contrasts with the choroid-plexus-biased
-secreted factors.
+<strong>Tert (telomerase reverse transcriptase) is expressed in isocortex (1.37) and hippocampus (1.24)</strong>
+at the highest levels among the aging suppressors in cortical regions, consistent with neural
+progenitor activity and telomere maintenance in aging neurons.
 </li>
 </ul>
 
@@ -148,11 +148,11 @@ aggregation and clearance in aging neurons.
 </li>
 
 <li>
-<strong>Kdm6a</strong> (UTX, H3K27me3 demethylase) peaks in choroid plexus (5.88) and
-olfactory bulb (4.54) — the same structures that are hubs for aging suppressor expression.
-The convergence of Kdm6a and klotho in choroid plexus is intriguing: UTX-mediated chromatin
-opening could regulate klotho transcription itself, linking the sex chromosome dosage and
-longevity-factor axes.
+<strong>Kdm6a</strong> (UTX, H3K27me3 demethylase) peaks in olfactory bulb (4.54) and
+cerebellum (2.93), with strong hippocampal expression (2.10). The convergence of Kdm6a and
+klotho in cerebellum and hippocampus is intriguing: UTX-mediated H3K27 demethylation could
+regulate klotho transcription itself in these same neurons, linking the sex chromosome dosage
+and longevity-factor axes at the chromatin level.
 </li>
 </ul>
 
@@ -166,17 +166,19 @@ across cortex and hippocampus, are positioned to exert systematic effects on chr
 and gene regulation that could differ between XX and XY brains.
 </li>
 <li>
-<strong>"How do aging-suppressors impact the brain?"</strong> — The choroid plexus concentration
-of Kl, Fgf21, and Igf1 frames this structure as the primary node for aging-suppressor input to
-the brain. Understanding what regulates their expression in choroid plexus epithelial cells —
-and how that changes with aging or disease — seems like a high-leverage question.
+<strong>"How do aging-suppressors impact the brain?"</strong> — The cerebellar and hippocampal
+concentration of Kl, and the hippocampal expression of Tert, place these factors at the
+intersection of the brain's most aging-vulnerable circuits. Understanding what regulates their
+expression in hippocampal neurons — and how that changes with aging or disease — seems like a
+high-leverage question, especially in light of the lab's finding that CSF or peripheral klotho
+elevation rescues cognitive decline.
 </li>
 <li>
 <strong>"Can anti-aging strategies prevent cognitive decline?"</strong> — The hippocampal
-expression of klotho and the X-escapee chromatin regulators suggests that both longevity-factor
-delivery (via CSF from choroid plexus) and chromatin state maintenance (via KDM6A/KDM5C dosage)
-converge on the hippocampus — the canonical structure for cognitive aging. These two axes could
-potentially be targeted in combination.
+co-expression of klotho and the X-escapee chromatin regulators Kdm6a and Kdm5c suggests that
+longevity-factor production and chromatin state maintenance converge on the hippocampus.
+These two axes — aging suppressor expression and sex chromosome dosage effects on chromatin —
+could potentially be targeted in combination to extend cognitive healthspan.
 </li>
 </ul>
 
@@ -192,7 +194,7 @@ background is where I can be most useful to your lab.
 Data retrieved July 2026. Allen Mouse Brain Atlas (Allen Institute for Brain Science, 2004),
 in situ hybridization, adult mouse (P56), via RMA API at
 <code>api.brain-map.org/api/v2/data/query.json</code>.
-Structures: Choroid plexus (id 220), Isocortex (315), Hippocampal formation (1089),
+Structures: Midbrain (id 313), Isocortex (315), Hippocampal formation (1089),
 Cerebellum (512), Hypothalamus (1097), Striatum/Caudoputamen (672), Olfactory bulb (507),
 Thalamus (549).
 Expression metric: <em>expression_energy</em> from StructureUnionize (first ISH dataset
