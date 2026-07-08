@@ -25,7 +25,7 @@ AGING_GENES = ["Kl", "Fgf21", "Igf1", "Foxo3", "Sirt1", "Tert", "Gdf11", "Gdf15"
 XESCAPE_GENES = ["Kdm6a", "Kdm5c", "Ddx3x", "Eif2s3x", "Usp9x"]  # Xist is nuclear RNA, skip
 
 STRUCTURES = {
-    "Choroid_plexus": 220,
+    "Midbrain":       313,
     "Isocortex":      315,
     "Hippocampus":    1089,
     "Cerebellum":     512,
