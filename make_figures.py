@@ -7,9 +7,9 @@ import csv, math
 from pathlib import Path
 
 OUT = Path(__file__).parent
-STRUCTURES = ["Choroid_plexus","Isocortex","Hippocampus","Cerebellum",
+STRUCTURES = ["Midbrain","Isocortex","Hippocampus","Cerebellum",
               "Hypothalamus","Striatum","Olfact_bulb","Thalamus"]
-STRUCT_LABELS = ["Choroid\nplexus","Isocortex","Hippocampus","Cerebellum",
+STRUCT_LABELS = ["Midbrain","Isocortex","Hippocampus","Cerebellum",
                  "Hypothalamus","Striatum","Olf. bulb","Thalamus"]
 
 # ── Load data ──────────────────────────────────────────────────────────────────
@@ -104,8 +104,9 @@ for si, lbl in enumerate(STRUCT_LABELS):
     x = LEFT + si * CELL_W + CELL_W // 2
     lines = lbl.split("\n")
     y0 = TOP - 8 - (len(lines) - 1) * 11
-    # highlight choroid plexus column
-    if si == 0:
+    # highlight cerebellum column (Kl peak)
+    CB_SI = STRUCTURES.index("Cerebellum")
+    if si == CB_SI:
         col_hdrs += (
             f'<rect x="{LEFT}" y="{TOP-40}" width="{CELL_W}" height="40" '
             f'fill="#fff8e1" rx="3"/>'
@@ -120,12 +121,12 @@ for si, lbl in enumerate(STRUCT_LABELS):
         col_hdrs = col_hdrs.rsplit("<text", 1)[0]  # redo
         for li, part in enumerate(parts):
             y = TOP - 4 - (len(parts) - 1 - li) * 12
-            fw = "bold" if si == 0 else "normal"
-            fc = "#b07800" if si == 0 else "#444"
+            fw = "bold" if si == CB_SI else "normal"
+            fc = "#b07800" if si == CB_SI else "#444"
             col_hdrs += (f'<text x="{x}" y="{y}" text-anchor="middle" font-size="9.5" '
                          f'fill="{fc}" font-weight="{fw}">{part}</text>')
     else:
-        if si == 0:
+        if si == CB_SI:
             col_hdrs += f'<text x="{x}" y="{TOP-8}" text-anchor="middle" font-size="9.5" fill="#b07800" font-weight="bold">{lbl}</text>'
         else:
             col_hdrs += f'<text x="{x}" y="{TOP-8}" text-anchor="middle" font-size="9.5" fill="#444">{lbl}</text>'
@@ -168,7 +169,7 @@ svg1 = f"""<svg viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg"
     Allen Mouse Brain Atlas · expression energy (row-normalized per gene) · values annotated where &gt;0.5
   </text>
   <text x="{W//2}" y="52" text-anchor="middle" font-size="10" fill="#b07800">
-    ▶ Choroid plexus highlighted: primary secretory hub for Kl, Fgf21, Igf1 into CSF
+    ▶ Cerebellum highlighted: highest Kl (klotho) expression site in brain
   </text>
   {colorbar}
   {col_hdrs}
